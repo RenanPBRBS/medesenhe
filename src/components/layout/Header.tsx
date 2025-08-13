@@ -1,6 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { SignedIn, SignedOut, UserButton } from "@clerk/nextjs";
 import Link from "next/link";
+import { CreditCounter } from "./CreditCounter"; // 1. Importar o novo componente
 
 export function Header() {
   return (
@@ -11,7 +12,6 @@ export function Header() {
         </Link>
 
         <div className="flex items-center gap-4">
-          {/* Para usuários deslogados */}
           <SignedOut>
             <Link href="/sign-in">
               <Button variant="ghost">Login</Button>
@@ -21,8 +21,11 @@ export function Header() {
             </Link>
           </SignedOut>
 
-          {/* Para usuários logados */}
           <SignedIn>
+            <CreditCounter /> {/* 2. Adicionar o contador aqui */}
+            <Link href="/dashboard">
+              <Button variant="outline">Dashboard</Button>
+            </Link>
             <UserButton afterSignOutUrl="/" />
           </SignedIn>
         </div>
